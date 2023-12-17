@@ -42,4 +42,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    //this refers to instance of current class, which is the User Model here
+    //hasMany establishes a one to many relationship between this model and another model, Post in this csae
+    //'user_id' indicates the foreign key in the posts table used to associate with users
+    public function userPosts() {
+        return $this->hasMany(Post::class, 'user_id');
+    }
 }

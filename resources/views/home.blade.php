@@ -11,12 +11,39 @@
 
     {{-- conditional rendering based on if the user is logged in --}}
     @auth
-    <h1>You are logged in</h1>
+        <h1>You are logged in</h1>
+        <form action='/logout' method="POST">
+            @csrf
+            <button>Log Out</button>
+        </form>
 
-    <form action='/logout' method="POST">   
-        @csrf
-        <button>Log Out</button>
-    </form>
+        <div>
+            <h2>Create a New Post</h2>
+            <form action="/create-post" method="POST">
+                @csrf
+                <input type="text" name="title" placeholder="Title">
+                <textarea name="body" placeholder="Type your post here..."></textarea>
+                <button>Create Post</button>
+            </form>
+        </div>
+
+        <div>
+            <h2>All posts</h2>
+            {{-- this is similar to rendering html with JS in React using {}-syntax --}}
+            @foreach ($posts as $post)
+                <div class='blog-post'>
+                    <h3>{{ $post['title'] }} by {{ $post ->user->name}}</h3>
+                    <p>{{ $post['body'] }}</p>
+                    <p><a href="/edit-post/{{ $post->id }}">Edit</a></p>
+                    <form action="/delete-post/{{ $post->id }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button>Delete</button>
+                    </form>
+                </div>
+            @endforeach
+
+        </div>
     @else
         <div id='sign-up'>
             <h2>Register</h2>

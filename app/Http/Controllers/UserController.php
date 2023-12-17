@@ -12,6 +12,7 @@ class UserController extends Controller
     public function register(Request $request) {
         //request object has a validate field method we call using arrow syntax, similar to dot syntax in JS
         //rules are defined in an associative array
+        //the validate method returns associate array of request fields if passed, or error if failed
         $incomingFields = $request->validate([
             'name' => ['required', 'min:3', 'max:28', Rule::unique('users', 'name')],
             'email' => ['required', 'email', Rule::unique('users', 'email')],
