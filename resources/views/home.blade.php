@@ -8,19 +8,19 @@
     @vite('resources/css/app.css')
 </head>
 
-<body>
+<body class='flex flex-col h-screen'>
 
     {{-- conditional rendering based on if the user is logged in --}}
     @auth
-    <div class="text-red-500">
-        This is a test element with a Tailwind CSS class.
-    </div>
-        <h1 class='text-ellipsis text-center'>You are logged in</h1>
-        <form action='/logout' method="POST">
+    <div id='top-bar' class='flex w-screen items-center'>
+        <h1 class='flex-grow text-ellipsis text-center'>Hi {{ ucwords(auth()->user()->name) }}</h1>
+        <form action='/logout' method="POST" class='ml-auto mr-8 mt-6'>
             @csrf
             <button>Log Out</button>
         </form>
-
+    </div>
+    
+    <div id='main-content' class='flex w-screen'>
         <div>
             <h2>Create a New Post</h2>
             <form action="/create-post" method="POST">
@@ -48,34 +48,34 @@
             @endforeach
 
         </div>
-    @else
-    <div class="bg-blue-500 text-white p-4">
-        This is a test element with a Tailwind CSS class.
     </div>
-        <div class='text-cen  '>
-            <div id='sign-up'>
-                <h2>Register</h2>
-                <form action="/register" method="POST">
-                    {{-- this @ syntax is allowed in blade files to access utilities --}}
-                    @csrf
-                    <input type="text" name="name" placeholder="name">
-                    <input type="text" name="email" placeholder="email">
-                    <input type="password" name="password" id="password" placeholder="password">
-                    <button>Register</button>
-                </form>
-            </div>
+    @else
+        <div id='login-page' class='h-screen flex align-middle justify-center items-center'>
+            
+                <div id='register' class='flex flex-col h-10 mx-10'>
+                    <h2>Register</h2>
+                    <form action="/register" method="POST" class='flex flex-col'>
+                        {{-- this @ syntax is allowed in blade files to access utilities --}}
+                        @csrf
+                        <input type="text" name="name" placeholder="name" class='my-2'>
+                        <input type="text" name="email" placeholder="email" class='my-2'>
+                        <input type="password" name="password" id="password" placeholder="password" class='my-2'>
+                        <button class='my-2'>Register</button>
+                    </form>
+                </div>
 
-            <div id='sign-in'>
-                <h2>Login</h2>
-                <form action="/login" method="POST">
-                    {{-- this @ syntax is allowed in blade files to access utilities --}}
-                    @csrf
-                    <input type="text" name="loginname" placeholder="name">
-                    <input type="password" name="loginpassword" placeholder="password">
-                    <button>Login</button>
-                </form>
-            </div>
-            <div>
+                <div id='login'class='flex flex-col h-10  mx-10'>
+                    <h2>Login</h2>
+                    <form action="/login" method="POST" class='flex flex-col'>
+                        {{-- this @ syntax is allowed in blade files to access utilities --}}
+                        @csrf
+                        <input type="text" name="loginname" placeholder="name" class='my-2'>
+                        <input type="password" name="loginpassword" placeholder="password" class='my-2'>
+                        <button>Login</button class='my-2'>
+                    </form>
+                </div>
+                
+        </div>
             @endauth
 
 </body>
