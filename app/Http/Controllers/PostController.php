@@ -12,13 +12,20 @@ class PostController extends Controller
     {
         $incomingFields = $request->validate([
             'title' => 'required',
-            'body' => 'required'
+            'author' => 'required',
+            'hero_image' => 'required',
+            'body_1' => 'required',
+            'image_2' => 'required',
+            'body_2' => 'required'
         ]);
 
         //strip_tags method cleans up input data - removed HTML and PHP tags
         $incomingFields['title'] = strip_tags($incomingFields['title']);
-        $incomingFields['body'] = strip_tags($incomingFields['body']);
-        $incomingFields['user_id'] = auth()->id();
+        $incomingFields['author'] = strip_tags($incomingFields['author']);
+        $incomingFields['hero_image'] = strip_tags($incomingFields['hero_image']);
+        $incomingFields['body_1'] = strip_tags($incomingFields['body_1']);
+        $incomingFields['image_2'] = strip_tags($incomingFields['image_2']);
+        $incomingFields['body_2'] = strip_tags($incomingFields['body_2']);
         Post::create($incomingFields);
         return redirect('/');
     }
@@ -26,7 +33,8 @@ class PostController extends Controller
     //use the metaphor syntax for Post type class, assign to post variable
     public function showEditScreen(Post $post)
     {
-        if (auth()->user()->id !== $post['user_id']) {
+        //check for logged in user
+        if (!auth()->check()) {
             return redirect('/');
         }
 
@@ -37,17 +45,25 @@ class PostController extends Controller
     //Request $request gives us the incoming request data from our form
     public function updatePost(Post $post, Request $request)
     {
-        if (auth()->user()->id !== $post['user_id']) {
+        if (!auth()->check()) {
             return redirect('/');
         }
 
         $incomingFields = $request->validate([
             'title' => 'required',
-            'body' => 'required'
+            'author' => 'required',
+            'hero_image' => 'required',
+            'body_1' => 'required',
+            'image_2' => 'required',
+            'body_2' => 'required'
         ]);
 
         $incomingFields['title'] = strip_tags($incomingFields['title']);
-        $incomingFields['body'] = strip_tags($incomingFields['body']);
+        $incomingFields['author'] = strip_tags($incomingFields['author']);
+        $incomingFields['hero_image'] = strip_tags($incomingFields['hero_image']);
+        $incomingFields['body_1'] = strip_tags($incomingFields['body_1']);
+        $incomingFields['image_2'] = strip_tags($incomingFields['image_2']);
+        $incomingFields['body_2'] = strip_tags($incomingFields['body_2']);
 
         //Post model already has an update method thats standard
         $post->update($incomingFields);
@@ -55,7 +71,7 @@ class PostController extends Controller
     }
 
     public function deletePost(Post $post) {
-        if (auth()->user()->id !== $post['user_id']) {
+        if (!auth()->check()) {
             return redirect('/');
         }
 

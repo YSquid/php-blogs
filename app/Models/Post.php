@@ -11,12 +11,12 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'body', 'user_id'];
-
-
-    //this returns the relationship between a post, and a user
-    //It says a Post belongs to an instance of the User class, related by user_id
-    public function user() {
-        return $this->belongsTo(User::class, 'user_id');
-    }
+    protected $fillable = [
+        'title', 
+        'author',
+        'hero_image',
+        'body_1',
+        'image_2',
+        'body_2',
+    ];
 }
