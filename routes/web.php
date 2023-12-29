@@ -17,18 +17,22 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    $posts = [];
-    //built in check method on auth sees if user is logged in
-    if (auth()->check()) {
-        //checks the authenticated user, called userPosts method on Post Model, calls built in latest and get methods
-        $posts = auth()->user()->userPosts()->latest()->get();
-    }
+// Route::get('/', function () {
+//     $posts = [];
+//     //built in check method on auth sees if user is logged in
+//     if (auth()->check()) {
+//         //checks the authenticated user, called userPosts method on Post Model, calls built in latest and get methods
+//         $posts = auth()->user()->userPosts()->latest()->get();
+//     }
 
-    return view('home', ['posts' => $posts]);
-});
+//     return view('home', ['posts' => $posts]);
+// });
 
 //AUTH ROUTES
+Route::get('/login', function() {
+    return view('admin.login');
+});
+
 Route::post('/register', [UserController::class, 'register']);
 
 Route::post('/login', [UserController::class, 'login']);
@@ -36,9 +40,18 @@ Route::post('/login', [UserController::class, 'login']);
 Route::post('/logout', [UserController::class, 'logout']);
 //
 
+//ADMIN PANEL ROUTES
+
+Route::get('/admin', function() {
+    if (auth()->check()) {
+    return view('admin.admin-home');
+    } 
+
+    return view('admin.login');
+});
+
 //Blog Post Routes
 Route::post('/create-post', [PostController::class, 'createPost']);
-
 Route::get('/edit-post/{post}', [PostController::class, 'showEditScreen']);
 Route::put('/edit-post/{post}', [PostController::class, 'updatePost']);
 Route::delete('/delete-post/{post}',[PostController::class, 'deletePost']);
