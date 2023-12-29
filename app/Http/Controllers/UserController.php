@@ -34,14 +34,24 @@ class UserController extends Controller
     }
 
     public function login(Request $request) {
-        $incomingFields = $request->validate([
-            'loginname' => 'required',
-            'loginpassword' => 'required'
-        ]);
-        if (auth() ->attempt(['name' => $incomingFields['loginname'], 'password' => $incomingFields['loginpassword']])) {
-            $request->session()->regenerate();
+        try {
+            $incomingFields = $request->validate([
+                'username' => 'required',
+                'password' => 'required'
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Validation failed
+            return redirect('/login')->withErrors($e->errors())->withInput();
         }
-        return redirect('/');
+    
+        if (auth()->attempt(['name' => $incomingFields['username'], 'password' => $incomingFields['password']])) {
+            $request->session()->regenerate();
+        } else {
+            // Authentication failed
+            return redirect('/login')->withErrors(['loginError' => 'Invalid username or password'])->withInput();
+        }
+    
+        return redirect('/admin');
     }
 
     public function logout() {
