@@ -5,6 +5,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,10 @@ Route::post('/login', [UserController::class, 'login']);
 Route::post('/logout', [UserController::class, 'logout']);
 //
 
+//SESSSION CONTROLLER
+
+Route::post('/update-session', [SessionController::class, 'updateSession']);
+
 //ADMIN PANEL ROUTES
 
 Route::get('/admin', function() {
@@ -58,6 +63,10 @@ Route::get('/', function() {
 });
 
 //Blog Post Routes
+Route::get('/create-post', function() {
+    return view('admin.posts.create-post');
+});
+
 Route::post('/create-post', [PostController::class, 'createPost']);
 Route::get('/edit-post/{post}', [PostController::class, 'showEditScreen']);
 Route::put('/edit-post/{post}', [PostController::class, 'updatePost']);

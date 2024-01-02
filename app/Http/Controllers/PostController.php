@@ -27,7 +27,7 @@ class PostController extends Controller
         $incomingFields['image_2'] = strip_tags($incomingFields['image_2']);
         $incomingFields['body_2'] = strip_tags($incomingFields['body_2']);
         Post::create($incomingFields);
-        return redirect('/');
+        return redirect('/admin');
     }
 
     //use the metaphor syntax for Post type class, assign to post variable
