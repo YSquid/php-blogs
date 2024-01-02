@@ -10,75 +10,75 @@
 
     <script>
         //execute once DOM is loaded
-         $(document).ready(function () {
-        //intialize post request to server at /update-session
-        //construct object to send in post request with dynamic property - property name is value is inputName param, value is the inputValue param
-        //send token with post
-        function updateSessionData(inputName, inputValue) {
-            $.post('/update-session', {
-                [inputName]: inputValue,
-                '_token': '{{ csrf_token() }}'
-            });
-        }
+        $(document).ready(function() {
+            //intialize post request to server at /update-session
+            //construct object to send in post request with dynamic property - property name is value is inputName param, value is the inputValue param
+            //send token with post
+            function updateSessionData(inputName, inputValue) {
+                $.post('/update-session', {
+                    [inputName]: inputValue,
+                    '_token': '{{ csrf_token() }}'
+                });
+            }
 
-        //attach an input event listenser to all input and text area fields
-        //this will refer to the element this listener is attached to
-        //call the updateSession Data function with the inputName and inputValue
-        $(document).on('input', 'input, textarea', function () {
-            let inputName = $(this).attr('name');
-            let inputValue = $(this).val();
-            updateSessionData(inputName, inputValue);
+            //attach an input event listenser to all input and text area fields
+            //this will refer to the element this listener is attached to
+            //call the updateSession Data function with the inputName and inputValue
+            $(document).on('input', 'input, textarea', function() {
+                let inputName = $(this).attr('name');
+                let inputValue = $(this).val();
+                updateSessionData(inputName, inputValue);
+            });
         });
-    });
     </script>
-    
+
 </head>
 
 <body>
-    @if (session('post_data'))
-        <div class="alert alert-info">
-            Your previous form data is stored. Feel free to modify it.
+    <div class="flex flex-col justify-start items-center h-full bg-snow w-1607">
+        <h2 class="m-4">Create a Blog Post</h2>
+
+        <div id="create-post" class="w-1/2 bg-anti-flash-white p-8">
+            <form method="POST" action="/create-post" class="flex flex-col">
+                @csrf
+
+                <div class="form-group mb-4 flex flex-col">
+                    <label for="title" class='mb-4'>Title:</label>
+                    <input type="text" name="title" class="form-control" required
+                        value="{{ old('title', session('post_data.title')) }}">
+                </div>
+
+                <div class="form-group mb-4 flex flex-col">
+                    <label for="author" class='mb-4'>Author:</label>
+                    <input type="text" name="author" class="form-control" required
+                        value="{{ old('author', session('post_data.author')) }}">
+                </div>
+
+                <div class="form-group mb-4 flex flex-col">
+                    <label for="hero_image" class='mb-4'>Hero Link (URL):</label>
+                    <input type="url" name="hero_image" class="form-control w-full" required
+                        value="{{ old('hero_image', session('post_data.hero_image')) }}">
+                </div>
+
+                <div class="form-group mb-4 flex flex-col">d
+                    <label for="image_2" class='mb-4'>Image 2 Link (URL):</label>
+                    <input type="url" name="image_2" class="form-control w-full" required
+                        value="{{ old('image_2', session('post_data.image_2')) }}">
+                </div>
+
+                <div class="form-group mb-4 flex flex-col">
+                    <label for="body_1" class='mb-4'>Body 1:</label>
+                    <textarea name="body_1" class="form-control" rows="5" required>{{ old('body_1', session('post_data.body_1')) }}</textarea>
+                </div>
+
+                <div class="form-group mb-4 flex flex-col">
+                    <label for="body_2" class='mb-4'>Body 2:</label>
+                    <textarea name="body_2" class="form-control" rows="5" required>{{ old('body_2', session('post_data.body_2')) }}</textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary bg-tropical-indigo mx-auto w-1/4 text-white">Submit</button>
+            </form>
         </div>
-    @endif
-
-    <div class="container">
-        <h2>Create a Blog Post</h2>
-
-        <form method="POST" action="/create-post">
-            @csrf
-
-            <div class="form-group">
-                <label for="title">Title:</label>
-                <input type="text" name="title" class="form-control" required value="{{ old('title', session('post_data.title')) }}">
-            </div>
-
-            <div class="form-group">
-                <label for="author">Author:</label>
-                <input type="text" name="author" class="form-control" required value="{{ old('author', session('post_data.author')) }}">
-            </div>
-
-            <div class="form-group">
-                <label for="hero_image">Hero Link (URL):</label>
-                <input type="url" name="hero_image" class="form-control" required value="{{ old('hero_image', session('post_data.hero_image')) }}">
-            </div>
-
-            <div class="form-group">
-                <label for="image_2">Image 2 Link (URL):</label>
-                <input type="url" name="image_2" class="form-control" required value="{{ old('image_2', session('post_data.image_2')) }}">
-            </div>
-
-            <div class="form-group">
-                <label for="body_1">Body 1:</label>
-                <textarea name="body_1" class="form-control" rows="5" required>{{ old('body_1', session('post_data.body_1')) }}</textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="body_2">Body 2:</label>
-                <textarea name="body_2" class="form-control" rows="5" required>{{ old('body_2', session('post_data.body_2')) }}</textarea>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
     </div>
 </body>
 
