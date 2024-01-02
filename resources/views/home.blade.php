@@ -12,6 +12,9 @@
 
    <div id='main-page'>
     @include('header.header')
+    {{-- passing the tags fed to the home view from controller to child component --}}
+    @include('tags.tags', ['tags' => $tags]) 
+    @include('feed.feed', ['posts' => $posts])
    </div>
 
 </body>
