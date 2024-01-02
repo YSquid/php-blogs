@@ -10,7 +10,9 @@
 
 <body class='flex flex-col h-screen'>
 
-   
+   <div id='main-page'>
+    @include('header.header')
+   </div>
 
 </body>
 

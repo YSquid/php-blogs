@@ -6,6 +6,7 @@
     <title>Admin Panel</title>
 </head>
 <body>
+    @include('header.header')
     <h1>Here is the admin panel poggers</h1>
 </body>
 </html>

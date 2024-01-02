@@ -50,6 +50,13 @@ Route::get('/admin', function() {
     return view('admin.login');
 });
 
+
+//BASE ROUTE
+
+Route::get('/', function() {
+    return view('home');
+});
+
 //Blog Post Routes
 Route::post('/create-post', [PostController::class, 'createPost']);
 Route::get('/edit-post/{post}', [PostController::class, 'showEditScreen']);
