@@ -29,6 +29,13 @@ class PostController extends Controller
         Post::create($incomingFields);
         return redirect('/admin');
     }
+    
+    public function showPost($id) {
+        
+        $post = Post::findOrFail($id);
+
+        return view('posts.post', ['post' => $post]);
+    }
 
     //use the metaphor syntax for Post type class, assign to post variable
     public function showEditScreen(Post $post)
