@@ -15,6 +15,10 @@ class SessionController extends Controller
     $post_data[$inputName] = $inputValue; // Add or update the specific field
     $request->session()->put('post_data', $post_data); //updates the post_data in the session object with updated post_data
 
+    $tag_data = $request->session()->get('tag_data', []);
+    $tag_data[$inputName] = $inputValue;
+    $request->session()->put('tag_data',  $tag_data); //updates the post_data in the session object with updated post_data
+
     return response()->json(['success' => true]); //lets client know response is success
 }
 }

@@ -6,9 +6,14 @@
     <title>Document</title>
 </head>
 <body>
-    <div id='blog-post'>
-        <h1>{{ $post->title }}</h1>
-        <h2>{{ $post->author }}</h2>
+    <div id='tags'>
+        <h1>Categories</h1>
+
+        <ul>
+            @foreach($tags as $tag)
+                <li>{{ $tag->name }}</li>
+            @endforeach
+        </ul>
     </div>
 </body>
 </html>

@@ -18,5 +18,6 @@ class Post extends Model
         'body_1',
         'image_2',
         'body_2',
+        'preview_text'
     ];
 }

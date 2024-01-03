@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\TagsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,15 +60,28 @@ Route::get('/admin', function() {
 //BASE ROUTE
 
 Route::get('/', function() {
-    return view('home');
+    $tags = (new TagsController()) -> index();
+    $posts = (new PostController()) -> index();
+    return view('home', ['tags' => $tags, 'posts' => $posts]);
 });
 
-//Blog Post Routes
+//BLOG POST ROUTES
+
+Route::get('/post/{id}', [PostController::class, 'showPost']);
+
 Route::get('/create-post', function() {
     return view('admin.posts.create-post');
 });
-
 Route::post('/create-post', [PostController::class, 'createPost']);
 Route::get('/edit-post/{post}', [PostController::class, 'showEditScreen']);
 Route::put('/edit-post/{post}', [PostController::class, 'updatePost']);
 Route::delete('/delete-post/{post}',[PostController::class, 'deletePost']);
+
+
+//TAG ROUTES
+
+Route::get('/create-tag', function() {
+    return view('admin.tags.create-tag');
+});
+
+Route::post('/create-tag', [TagsController::class, 'createTag']);
