@@ -28,10 +28,10 @@
 </head>
 
 <body>
-    <div class="flex flex-col justify-start items-center h-full bg-snow w-1607">
-        <h2 class="m-4">Edit Blog Post</h2>
+    <div class="flex flex-col justify-start items-center h-full bg-white w-1607">
+        <h2 class="m-4 text-2xl font-bold">Edit Blog Post</h2>
 
-        <div id="edit-post" class="w-1/2 bg-anti-flash-white p-8">
+        <div id="edit-post" class="w-1/2 bg-snow p-8 border border-light-grey shadow-onyx">
             <form method="POST" action="/update-post/{{ $post->id }}" class="flex flex-col">
                 @csrf
                 @method('PUT') <!-- Use PUT method for updating the post -->
@@ -40,39 +40,39 @@
 
                 <div class="form-group mb-4 flex flex-col">
                     <label for="title" class='mb-4'>Title:</label>
-                    <input type="text" name="title" class="form-control" required
+                    <input type="text" name="title" class="form-control border border-light-grey hover:border-x-sea-green" required
                     value="{{ old('title', session('post_data.title', $post->title)) }}">
                 </div>
 
                 <div class="form-group mb-4 flex flex-col">
                     <label for="author" class='mb-4'>Author:</label>
-                    <input type="text" name="author" class="form-control" required
+                    <input type="text" name="author" class="form-control border border-light-grey hover:border-x-sea-green" required
                     value="{{ old('author', session('post_data.author', $post->author)) }}">
                 </div>
 
                 <div class="form-group mb-4 flex flex-col">
                     <label for="hero_image" class='mb-4'>Hero Link (URL):</label>
-                    <input type="url" name="hero_image" class="form-control w-full" required
+                    <input type="url" name="hero_image" class="form-control w-full border border-light-grey hover:border-x-sea-green" required
                     value="{{ old('hero_image', session('post_data.hero_image', $post->hero_image)) }}">
                 </div>
 
                 <div class="form-group mb-4 flex flex-col">
                     <label for="image_2" class='mb-4'>Image 2 Link (URL):</label>
-                    <input type="url" name="image_2" class="form-control w-full" required
+                    <input type="url" name="image_2" class="form-control w-full border border-light-grey hover:border-x-sea-green" required
                     value="{{ old('image_2', session('post_data.image_2', $post->image_2)) }}">
                 </div>
 
                 <div class="form-group mb-4 flex flex-col">
                     <label for="body_1" class='mb-4'>Body 1:</label>
-                    <textarea name="body_1" class="form-control" rows="5" required>{{ old('body_1', session('post_data.body_1', $post->body_1)) }}</textarea>
+                    <textarea name="body_1" class="form-control border border-light-grey hover:border-x-sea-green" rows="5" required>{{ old('body_1', session('post_data.body_1', $post->body_1)) }}</textarea>
                 </div>
 
                 <div class="form-group mb-4 flex flex-col">
                     <label for="body_2" class='mb-4'>Body 2:</label>
-                    <textarea name="body_2" class="form-control" rows="5" required>{{ old('body_2', session('post_data.body_2', $post->body_2)) }}</textarea>
+                    <textarea name="body_2" class="form-control border border-light-grey hover:border-x-sea-green" rows="5" required>{{ old('body_2', session('post_data.body_2', $post->body_2)) }}</textarea>
                 </div>
 
-                <button type="submit" class="btn btn-primary bg-tropical-indigo mx-auto w-1/4 text-white">Update</button>
+                <button type="submit" class="btn btn-primary bg-iris mx-auto w-1/4 text-white rounded hover:bg-sea-green">Update</button>
             </form>
         </div>
     </div>

@@ -33,19 +33,19 @@
                     <h3 class="mb-8 text-onyx text-md font-medium">Author: {{ $post->author }}</h3>
                     <p class='text-md'>{{ $post->preview_text }}</p>
                     <a href="{{ url('/post', ['id' => $post->id]) }}"
-                        class=' mt-auto mb-2 bg-iris text-white text-center hover:border border-black'>Read</a>
+                        class=' mt-auto mb-2 bg-iris text-white text-center rounded hover:bg-sea-green'>Read</a>
                     
                     {{-- ADMIN PANEL BUTTONS --}}
                     @auth
                         <div id="edit-post-{{ $post->id }}">
-                            <a href="/edit-post/{{ $post->id }}" class="bg-iris text-white p-1">Edit Post</a>
+                            <a href="/edit-post/{{ $post->id }}" class="bg-iris text-white p-1 rounded hover:bg-sea-green">Edit Post</a>
                             
                             <form id="deleteForm{{ $post->id }}" action="/delete-post/{{ $post->id }}"
                                 method="POST" style="display: none;">
                                 @csrf
                                 @method('DELETE')
                             </form>
-                            <a href="#" onclick="confirmDelete('{{ $post->id }}')" class='bg-red text-white p-1'>Delete Post</a>
+                            <a href="#" onclick="confirmDelete('{{ $post->id }}')" class='bg-red text-white p-1 rounded hover:bg-sea-green'>Delete Post</a>
                         </div>
                     @endauth
                 </div>
