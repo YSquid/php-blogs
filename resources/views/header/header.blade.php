@@ -21,9 +21,6 @@
         <div id='link'>
             @auth
                 <a href="/admin"><h1 class="text-white text-lg font-bold">Admin Panel</h1></a>
-            @else
-                <a href="/"><h1 class="text-white text-lg">Feed</h1></a>
-
             @endauth
         </div>
         <div id='title' class='mr-4'>

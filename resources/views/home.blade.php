@@ -4,24 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Home Page</title>
     @vite('resources/css/app.css')
 </head>
 
-<body class='flex flex-col h-screen'>
+<body id="main-body" class='flex flex-col h-screen'>
 
-    <div id='main-page'>
+    <div id='main-page' class="flex flex-col w-full justify-center">
         @include('header.header')
         {{-- passing the tags fed to the home view from controller to child component --}}
-        <div id='main-content' class="flex">
-            <div id='categories' class="flex class=w-1/5 p-4 justify-center items-center">   
-            @include('tags.tags', ['tags' => $tags])
-            </div>
 
-            <div id='feed' class="flex w-4/5 p4">
+        <div id='feed' class="flex xs:w-full sm:w-full md:w-1/2 m-auto">
             @include('feed.feed', ['posts' => $posts])
-            </div>
-        <div>
+        </div>
 
 </body>
 
