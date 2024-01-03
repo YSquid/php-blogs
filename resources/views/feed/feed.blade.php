@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Feed Component</title>
+
+
+    <script>
+        function confirmDelete(postId) {
+            if (confirm('Are you sure you want to delete this post?')) {
+                // Trigger the corresponding form submission
+                document.getElementById('deleteForm' + postId).submit();
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -22,7 +32,20 @@
                     </a>
                     <h3 class="mb-8 text-onyx text-md font-medium">Author: {{ $post->author }}</h3>
                     <p class='text-md'>{{ $post->preview_text }}</p>
-                    <a href="{{ url('/post', ['id' => $post->id]) }}" class=' mt-auto mb-2 bg-iris text-white text-center hover:border border-black'>Read</a>
+                    <a href="{{ url('/post', ['id' => $post->id]) }}"
+                        class=' mt-auto mb-2 bg-iris text-white text-center hover:border border-black'>Read</a>
+
+                    @auth
+                        <div id="edit-post-{{ $post->id }}">
+                            <a href="/edit-post/{{ $post->id }}">Edit Post</a>
+                            <form id="deleteForm{{ $post->id }}" action="/delete-post/{{ $post->id }}"
+                                method="POST" style="display: none;">
+                                @csrf
+                                @method('DELETE')
+                            </form>
+                            <a href="#" onclick="confirmDelete('{{ $post->id }}')">Delete Post</a>
+                        </div>
+                    @endauth
                 </div>
 
 

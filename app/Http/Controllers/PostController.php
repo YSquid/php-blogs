@@ -38,14 +38,16 @@ class PostController extends Controller
     }
 
     //use the metaphor syntax for Post type class, assign to post variable
-    public function showEditScreen(Post $post)
+    public function showEditScreen($id)
     {
         //check for logged in user
         if (!auth()->check()) {
             return redirect('/');
         }
 
-        return view('edit-post', ['post' => $post]);
+        $post = Post::findOrFail($id);
+
+        return view('admin.posts.edit-post', ['post' => $post]);
     }
 
     //Post $post gives us the post were are trying to update
@@ -65,27 +67,33 @@ class PostController extends Controller
             'body_2' => 'required'
         ]);
 
-        $incomingFields['title'] = strip_tags($incomingFields['title']);
-        $incomingFields['author'] = strip_tags($incomingFields['author']);
-        $incomingFields['hero_image'] = strip_tags($incomingFields['hero_image']);
-        $incomingFields['body_1'] = strip_tags($incomingFields['body_1']);
-        $incomingFields['image_2'] = strip_tags($incomingFields['image_2']);
-        $incomingFields['body_2'] = strip_tags($incomingFields['body_2']);
+         // Strip HTML and PHP tags
+        $incomingFields = array_map('strip_tags', $incomingFields);
 
-        //Post model already has an update method thats standard
+        // Assuming you have a route parameter {id} for the post you want to update
+        $postId = $request->route('id');
+
+        // Retrieve the existing post
+        $post = Post::findOrFail($postId);
+
+        // Update the post fields
         $post->update($incomingFields);
-        return redirect('/');
+
+        return redirect('/admin');
     }
 
-    public function deletePost(Post $post) {
+    public function deletePost($id) {
         if (!auth()->check()) {
             return redirect('/');
         }
 
+        $post = Post::findOrFail($id);
+
         $post->delete();
-        return redirect('/');
+        return redirect('/admin');
     }
 
+    //used to return all posts for feed
     public function index() {
         return Post::all();
     }
