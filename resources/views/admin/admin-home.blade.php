@@ -7,7 +7,6 @@
 </head>
 <body>
     @include('header.header')
-    <h1>Here is the admin panel poggers</h1>
     <a href="/create-post" class="btn"><i class="fa-solid fa-plus"></i> Create Post</a>
     <a href="/create-tag" class="btn"><i class="fa-solid fa-plus"></i> Create Tag</a>
 </body>
