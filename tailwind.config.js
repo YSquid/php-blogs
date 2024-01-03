@@ -15,6 +15,7 @@ export default {
             current: "currentColor",
             white: "#ffffff",
             black: "#000000",
+            red: '#FF0000',
             "light-grey": "#EFEFF0",
             snow: "#FFFCFC",
             onyx: "#36393B",

@@ -50,7 +50,9 @@ Route::post('/update-session', [SessionController::class, 'updateSession']);
 
 Route::get('/admin', function() {
     if (auth()->check()) {
-    return view('admin.admin-home');
+    $tags = (new TagsController()) -> index();
+    $posts = (new PostController()) -> index();
+    return view('admin.admin-home', ['tags' => $tags, 'posts' => $posts]);
     } 
 
     return view('admin.login');
@@ -68,14 +70,13 @@ Route::get('/', function() {
 //BLOG POST ROUTES
 
 Route::get('/post/{id}', [PostController::class, 'showPost']);
-
 Route::get('/create-post', function() {
     return view('admin.posts.create-post');
 });
 Route::post('/create-post', [PostController::class, 'createPost']);
-Route::get('/edit-post/{post}', [PostController::class, 'showEditScreen']);
-Route::put('/edit-post/{post}', [PostController::class, 'updatePost']);
-Route::delete('/delete-post/{post}',[PostController::class, 'deletePost']);
+Route::get('/edit-post/{id}', [PostController::class, 'showEditScreen']);
+Route::put('/update-post/{id}', [PostController::class, 'updatePost']);
+Route::delete('/delete-post/{id}',[PostController::class, 'deletePost']);
 
 
 //TAG ROUTES
