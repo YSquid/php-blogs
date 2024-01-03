@@ -12,22 +12,25 @@
     <div id='header' class="flex  bg-slate-50 justify-between items-center p-4 bg-onyx">
         <div id='socials' class='flex ml-4 bg-red-50 justify-between h-auto w-auto space-x-4'>
             <a href="https://github.com/YSquid" target="_blank" title="GitHub"><i
-                    class="fa-brands fa-github fa-2xl text-white"></i></a>
+                    class="fa-brands fa-github fa-2xl text-white hover:text-sea-green"></i></a>
             <a href="https://www.linkedin.com/in/ahmad-kariem/" target="_blank" title="LinkedIn"><i
-                    class="fa-brands fa-linkedin fa-2xl text-white"></i></a>
+                    class="fa-brands fa-linkedin fa-2xl text-white  hover:text-sea-green"></i></a>
             <a href="https://ahmadkariem.com/" target="_blank" title="ahmadkariem.com"><i
-                    class="fa-solid fa-globe fa-2xl text-white"></i></a>
+                    class="fa-solid fa-globe fa-2xl text-white  hover:text-sea-green"></i></a>
         </div>
         <div id='link'>
             @auth
-                <a href="/admin"><h1 class="text-white text-lg font-bold">Admin Panel</h1></a>
+                <a href="/admin"><h1 class="text-white text-lg font-bold  hover:text-sea-green">Admin Panel</h1></a>
+            @else
+            <a href="/"><h1 class="text-white text-lg font-bold  hover:text-sea-green">Home</h1></a>
+
             @endauth
         </div>
         <div id='title' class='mr-4'>
             @auth
-            <a href="/admin"><h1 class="text-white text-lg font-bold">Status201</h1></a>
+            <a href="/admin"><h1 class="text-white text-lg font-bold  hover:text-sea-green">Status201</h1></a>
             @else
-            <a href="/"><h1 class="text-white text-lg font-bold">Status201</h1></a>
+            <a href="/"><h1 class="text-white text-lg font-bold  hover:text-sea-green">Status201</h1></a>
             @endauth
         </div>
     </div>

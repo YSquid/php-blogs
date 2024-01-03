@@ -12,8 +12,12 @@
         @include('header.header')
         <div id='admin-feed' class="flex flex-col xs:w-full sm:w-full md:w-1/2 m-auto">
             <div id="create-buttons" class="text-center m-4">
-                <a href="/create-post" class="btn"><i class="fa-solid fa-plus"></i> Create Post</a>
-                <a href="/create-tag" class="btn"><i class="fa-solid fa-plus"></i> Create Tag</a>
+                <button class='bg-iris text-white p-1 hover:bg-sea-green'>
+                    <a href="/create-post" class="btn"><i class="fa-solid fa-plus m-1"></i>Create Post</a>
+                </button>
+                <button class='bg-iris text-white p-1 hover:bg-sea-green'>
+                    <a href="/create-tag" class="btn"><i class="fa-solid fa-plus m-1"></i>Create Tag</a>
+                </button>
             </div>
             @include('feed.feed', ['posts' => $posts])
         </div>
