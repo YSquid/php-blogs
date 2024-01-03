@@ -20,7 +20,7 @@
                     <a href="{{ url('/post', ['id' => $post->id]) }}" class='mb-2'>
                         <h2 class='font-bold text-2xl hover:text-iris'>{{ $post->title }}</h2>
                     </a>
-                    <h3 class="mb-8 text-onyx text-md font-medium">{{ $post->author }}</h3>
+                    <h3 class="mb-8 text-onyx text-md font-medium">Author: {{ $post->author }}</h3>
                     <p class='text-md'>{{ $post->preview_text }}</p>
                     <a href="{{ url('/post', ['id' => $post->id]) }}" class=' mt-auto mb-2 bg-iris text-white text-center hover:border border-black'>Read</a>
                 </div>
