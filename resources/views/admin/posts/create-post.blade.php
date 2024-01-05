@@ -60,7 +60,7 @@
                         value="{{ old('hero_image', session('post_data.hero_image')) }}">
                 </div>
 
-                <div class="form-group mb-4 flex flex-col">d
+                <div class="form-group mb-4 flex flex-col">
                     <label for="image_2" class='mb-4'>Image 2 Link (URL):</label>
                     <input type="url" name="image_2" class="form-control w-full  border border-light-grey  hover:border-x-sea-green" required
                         value="{{ old('image_2', session('post_data.image_2')) }}">
